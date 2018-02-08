@@ -9,11 +9,15 @@ const propertiesToJSON = (str) => {
                 ? false
                 : line
     )
-    return nonCommentLines.map(
-        (line) => line.replace(/(\=)/, ":").split(":")
-        // .map(([k, v]) => ({
-        // [k]: v
-        // }))
+    return nonCommentLines.map((line) =>
+        line
+            .replace(/(\=)/, ":")
+            .split(":")
+            .reduce((obj, arr) => {
+                console.log(arr)
+                obj[arr[0]] = arr[1]
+                return obj
+            }, {})
     )
 }
 
