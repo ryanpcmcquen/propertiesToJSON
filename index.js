@@ -1,24 +1,26 @@
 const propertiesToJSON = (str) => {
     const lines = str.replace(/\\\n/, "").split("\n")
-    const nonCommentLines = lines.filter(
-        (line) =>
-            line
-                .replace(/\s/g, "")
-                .slice(0, 1)
-                .match(/(\#|\!)/)
-                ? false
-                : line
-    )
-    return nonCommentLines.map((line) =>
-        line
-            .replace(/(\=)/, ":")
-            .split(":")
-            .reduce((obj, arr) => {
-                console.log(arr)
-                obj[arr[0]] = arr[1]
-                return obj
-            }, {})
-    )
+    return lines
+        .filter(
+            (line) =>
+                line
+                    .replace(/\s/g, "")
+                    .slice(0, 1)
+                    .match(/(\#|\!)/)
+                    ? false
+                    : line
+        )
+        .reduce((obj, line) => {
+            const colonifiedLine = line.replace(/(\=)/, ":")
+            const key = colonifiedLine
+                .substring(0, colonifiedLine.indexOf(":"))
+                .trim()
+            const value = colonifiedLine
+                .substring(colonifiedLine.indexOf(":") + 1)
+                .trim()
+            obj[key] = value
+            return obj
+        }, {})
 }
 
 module.exports = propertiesToJSON
