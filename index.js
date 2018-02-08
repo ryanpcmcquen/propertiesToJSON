@@ -1,5 +1,5 @@
-const parseProperties = (str) => {
-    const lines = str.split("\n");
+const propertiesToJSON = (str) => {
+    const lines = str.split("\n")
     const nonCommentLines = lines.filter(
         (line) =>
             line
@@ -8,18 +8,15 @@ const parseProperties = (str) => {
                 .match(/(\#|\!)/)
                 ? false
                 : line
-    );
-    return nonCommentLines.map(
-        (line) =>
-            line
-                .replace(/(\=)/, ":")
-                .split(":")
-                .map(
-                    ([k, v]) => ({
-                        [k]: v
-                    })
-                )
-    );
-};
+    )
+    return nonCommentLines.map((line) =>
+        line
+            .replace(/(\=)/, ":")
+            .split(":")
+            .map(([k, v]) => ({
+                [k]: v
+            }))
+    )
+}
 
-module.exports = parseProperties;
+module.exports = propertiesToJSON

@@ -1,0 +1,1 @@
+Convert Java ~.properties~ files to JSON.
