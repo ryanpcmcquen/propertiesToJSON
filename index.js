@@ -3,10 +3,7 @@ const propertiesToJSON = (str) => {
     return lines
         .filter(
             (line) =>
-                line
-                    .replace(/\s/g, "")
-                    .slice(0, 1)
-                    .match(/(\#|\!)/)
+                /(\#|\!)/.test(line.replace(/\s/g, "").slice(0, 1))
                     ? false
                     : line
         )

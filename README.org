@@ -1,1 +1,12 @@
-Convert Java ~.properties~ files to JSON.
+Convert Java ~.properties~ files to JSON (using JavaScript).
+
+The function ~propertiesToJSON~ takes a string as input and returns
+a JavaScript object.
+
+Example:
+
+#+BEGIN_SRC js
+const props = propertiesToJSON(data)
+console.log(props)
+console.log(props.website)
+#+END_SRC
