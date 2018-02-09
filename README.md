@@ -1,6 +1,6 @@
 Convert Java `.properties` files to JSON (using JavaScript).
 
-The function `propertiesToJSON` takes a string as input and returns
+The function `propertiesToJSON` takes a string and returns
 a JavaScript object.
 
 ### Read a local file in `node`:
@@ -38,8 +38,5 @@ const props = fetch(propsFile)
 
 ### How do I get it?
 
-```
-yarn add properties-to-json
-```
-
-Profit.
+1. `yarn add properties-to-json`
+2. Profit.
