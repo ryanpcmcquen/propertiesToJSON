@@ -1,6 +1,7 @@
-const propertiesToJSON = (str) => {
-    const lines = str.replace(/\\\n/, "").split("\n")
-    return lines
+const propertiesToJSON = (str) =>
+    str
+        .replace(/\\\n/, "")
+        .split("\n")
         .filter(
             (line) =>
                 /(\#|\!)/.test(line.replace(/\s/g, "").slice(0, 1))
@@ -18,6 +19,5 @@ const propertiesToJSON = (str) => {
             obj[key] = value
             return obj
         }, {})
-}
 
 module.exports = propertiesToJSON
