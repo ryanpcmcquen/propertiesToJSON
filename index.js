@@ -1,6 +1,6 @@
 const propertiesToJSON = (str) =>
     str
-        // Concat lines that end with '/'.
+        // Concat lines that end with '\'.
         .replace(/\\\n/, "")
         // Split by line breaks.
         .split("\n")
