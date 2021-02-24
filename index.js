@@ -13,12 +13,16 @@ const propertiesToJSON = (str) => {
             )
             // Create the JSON:
             .reduce((obj, line) => {
-                const colonifiedLine = line.replace(/(\=)/, ':');
+                // Replace only '=' that are not escaped with '\' to handle separator inside key
+                const colonifiedLine = line.replace(/(?<!\\)=/, ':');
                 const key = colonifiedLine
-                    .substring(0, colonifiedLine.indexOf(':'))
+                    // Extract key from index 0 to first not escaped colon index
+                    .substring(0, colonifiedLine.search(/(?<!\\):/))
+                    // Remove not needed backslash from key
+                    .replace(/\\/g, '')
                     .trim();
                 const value = colonifiedLine
-                    .substring(colonifiedLine.indexOf(':') + 1)
+                    .substring(colonifiedLine.search(/(?<!\\):/) + 1)
                     .trim();
                 obj[key] = value;
                 return obj;
