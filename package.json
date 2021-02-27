@@ -1,6 +1,6 @@
 {
     "name": "properties-to-json",
-    "version": "0.2.0",
+    "version": "0.2.1",
     "description": "Convert a Java properties file to JSON (with JavaScript).",
     "main": "index.js",
     "scripts": {
@@ -16,7 +16,7 @@
         "conversion"
     ],
     "author": "Ryan P. C. McQuen",
-    "license": "GPL-2.0+",
+    "license": "MPL-2.0",
     "bugs": {
         "url": "https://github.com/ryanpcmcquen/propertiesToJSON/issues"
     },
