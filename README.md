@@ -28,12 +28,14 @@ const propsFile = new Request(
 );
 
 const props = fetch(propsFile)
-    .then((response) => response.text())
+    .then((response) => {
+        return response.text();
+    })
     .then((text) => {
         const propsText = propertiesToJSON(text);
         console.log(propsText);
         return propsText;
-    })
+    });
 ```
 
 ### How do I get it?
