@@ -66,6 +66,7 @@ const propertiesToJSON = (str, options = {}) => {
                 obj[key] = value;
                 return obj;
             }
+
             let keys = key.split('.');
             return treeCreationRecursiveFn(keys, value, obj);
         }, {});
@@ -77,10 +78,18 @@ const propertiesToJSON = (str, options = {}) => {
 const treeCreationRecursiveFn = function (keys, value, result) {
     const key = keys[0];
     if (keys.length === 1) {
-        result[key] = value;
+        if (
+            typeof result[key] !== null &&
+            typeof result[key] === 'object' &&
+            typeof value === 'string'
+        ) {
+            console.warn(`key missing for value ->`, value);
+            console.warn('The value will have empty string as a key');
+            result[key][''] = value;
+        } else result[key] = value;
     } else {
-        // case: a=b \n a.c=d then o/p will be a: { '': 'b', c: 'd' } dont want to omit value b as it dont have key
-        let obj = { ...(result[key] !== undefined && { '': result[key] }) };
+        let obj = {};
+
         // since typeof null === "object" we check for null also https://stackoverflow.com/a/8511350/9740955
         if (
             typeof result[key] === 'object' &&
@@ -88,6 +97,13 @@ const treeCreationRecursiveFn = function (keys, value, result) {
             result[key] !== null
         )
             obj = result[key];
+        else if (typeof result[key] === 'string') {
+            // conflicting case: a=b \n a.c=d then o/p will be a: { '': 'b', c: 'd' }
+            obj = { ...(result[key] !== undefined && { '': result[key] }) };
+            console.warn(`key missing for value ->`, result[key]);
+            console.warn('The value will have empty string as a key');
+        }
+
         result[key] = treeCreationRecursiveFn(keys.slice(1), value, obj);
     }
     return result;
