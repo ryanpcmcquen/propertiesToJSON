@@ -24,6 +24,25 @@ Object of entire properties file:
 ----------------------------------------
         `);
         console.log(props.website);
+
+        const newProps = propertiesToJSON(data, {
+            jsonAsString: false,
+            convertToJsonTree: true,
+            parseNumber: true,
+            parseBooleanNullUndefined: true,
+        });
+        console.log(`
+-----------------------------------------------------
+Object of entire properties file with new json tree:
+-----------------------------------------------------
+        `);
+        console.log(newProps);
+        console.log(`
+------------------------------------------------------------
+'prefix:suffix' key of object (newProps.key["prefix:suffix"]):
+------------------------------------------------------------
+        `);
+        console.log(newProps.key['prefix:suffix']);
         console.log(`
 -----------------
 That's all folks!
